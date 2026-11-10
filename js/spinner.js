@@ -151,10 +151,12 @@
 
   // ---- 計算中獎項目 ----
   function getWinnerIndex() {
-    // 指針在頂部（角度 -π/2），計算哪個扇形對齊頂部
+    // 扇形 i 的起始角度 = currentAngle + i*sliceAngle - π/2
+    // 指針在頂部 = -π/2，對齊條件化簡後：
+    // normalized = (-currentAngle + 大倍數*2π) % 2π
+    // index = floor(normalized / sliceAngle)
     var sliceAngle = (Math.PI * 2) / items.length;
-    // 正規化角度：頂部對應 angle = 0 （扣除 -π/2 的偏移）
-    var normalized = ((Math.PI / 2) - currentAngle % (Math.PI * 2) + Math.PI * 2 * 10) % (Math.PI * 2);
+    var normalized = (-currentAngle % (Math.PI * 2) + Math.PI * 2 * 100) % (Math.PI * 2);
     var index = Math.floor(normalized / sliceAngle) % items.length;
     return index;
   }
