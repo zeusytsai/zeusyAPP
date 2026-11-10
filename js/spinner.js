@@ -139,7 +139,8 @@
       if (progress < 1) {
         animationId = requestAnimationFrame(animate);
       } else {
-        currentAngle = currentAngle % (Math.PI * 2);
+        // 先正規化再呼叫 showResult，確保 getWinnerIndex 拿到正確值
+        currentAngle = ((currentAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
         isSpinning = false;
         $('#spin-btn').prop('disabled', false);
         showResult();
@@ -151,14 +152,33 @@
 
   // ---- 計算中獎項目 ----
   function getWinnerIndex() {
-    // 扇形 i 的起始角度 = currentAngle + i*sliceAngle - π/2
-    // 指針在頂部 = -π/2，對齊條件化簡後：
-    // normalized = (-currentAngle + 大倍數*2π) % 2π
-    // index = floor(normalized / sliceAngle)
+    // 指針固定在頂部（Canvas 角度 = -π/2）
+    // 扇形 i 的範圍：[currentAngle + i*sliceAngle - π/2,  currentAngle + (i+1)*sliceAngle - π/2)
+    // 逐格掃描：看頂部角度 -π/2 落在哪個扇形內
     var sliceAngle = (Math.PI * 2) / items.length;
-    var normalized = (-currentAngle % (Math.PI * 2) + Math.PI * 2 * 100) % (Math.PI * 2);
-    var index = Math.floor(normalized / sliceAngle) % items.length;
-    return index;
+    var PI2 = Math.PI * 2;
+
+    for (var i = 0; i < items.length; i++) {
+      var start = currentAngle + i * sliceAngle - Math.PI / 2;
+      var end   = start + sliceAngle;
+
+      // 正規化到 [0, 2π)
+      var s = ((start % PI2) + PI2) % PI2;
+      var e = ((end   % PI2) + PI2) % PI2;
+      // 頂部指針角度 -π/2 正規化
+      var pointer = (((-Math.PI / 2) % PI2) + PI2) % PI2; // = 3π/2 = 4.712...
+
+      var inRange;
+      if (s < e) {
+        inRange = pointer >= s && pointer < e;
+      } else {
+        // 扇形跨越 0/2π 邊界
+        inRange = pointer >= s || pointer < e;
+      }
+
+      if (inRange) return i;
+    }
+    return 0;
   }
 
   // ---- 顯示結果 Modal ----
