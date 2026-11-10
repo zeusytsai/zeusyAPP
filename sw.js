@@ -1,5 +1,5 @@
-// 小土小紅家 Service Worker v1.0
-const CACHE_NAME = 'xiaotuXiaohong-v1';
+// 小土小紅家 Service Worker v1.1
+const CACHE_NAME = 'xiaotuXiaohong-v1.1';
 
 const STATIC_ASSETS = [
   './index.html',
