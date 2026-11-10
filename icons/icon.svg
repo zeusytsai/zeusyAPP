@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 橘色背景圓形 -->
+  <circle cx="256" cy="256" r="256" fill="#FF8C42"/>
+  <!-- 狗狗臉 -->
+  <circle cx="256" cy="270" r="140" fill="#FFF8F0"/>
+  <!-- 狗耳朵左 -->
+  <ellipse cx="148" cy="160" rx="55" ry="75" fill="#D4692A" transform="rotate(-20 148 160)"/>
+  <!-- 狗耳朵右 -->
+  <ellipse cx="364" cy="160" rx="55" ry="75" fill="#D4692A" transform="rotate(20 364 160)"/>
+  <!-- 眼睛左 -->
+  <circle cx="210" cy="250" r="22" fill="#3D2B1F"/>
+  <circle cx="217" cy="243" r="7" fill="white"/>
+  <!-- 眼睛右 -->
+  <circle cx="302" cy="250" r="22" fill="#3D2B1F"/>
+  <circle cx="309" cy="243" r="7" fill="white"/>
+  <!-- 鼻子 -->
+  <ellipse cx="256" cy="295" rx="28" ry="20" fill="#3D2B1F"/>
+  <!-- 嘴巴 -->
+  <path d="M230 315 Q256 340 282 315" stroke="#3D2B1F" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- 腮紅左 -->
+  <circle cx="175" cy="300" r="25" fill="#FFB347" opacity="0.5"/>
+  <!-- 腮紅右 -->
+  <circle cx="337" cy="300" r="25" fill="#FFB347" opacity="0.5"/>
+</svg>

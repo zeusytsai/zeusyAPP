@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#FF8C42" />
+  <meta name="description" content="小土小紅的家庭小工具，轉盤與投票都在這裡！" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icons/icon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="小土小紅家" />
+
+  <title>小土小紅家</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 5 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="./libs/css/bootstrap.css" />
+
+  <!-- 自訂樣式 -->
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/spinner.css" />
+  <link rel="stylesheet" href="./css/vote.css" />
+</head>
+<body>
+
+  <!-- ===== 頂部 Header ===== -->
+  <header class="app-header">
+    <span class="header-emoji">🐾</span>
+    <h1>小土小紅家</h1>
+    <span class="header-emoji">🐶</span>
+  </header>
+
+  <!-- ===== 轉盤頁 ===== -->
+  <section id="page-spinner" class="page-section">
+
+    <div class="paw-card spinner-wrapper">
+      <!-- 轉盤與指針 -->
+      <div class="canvas-container">
+        <div class="spinner-pointer"></div>
+        <canvas id="spinner-canvas" width="300" height="300"></canvas>
+        <div class="spinner-center-dot"></div>
+      </div>
+
+      <!-- 旋轉按鈕 -->
+      <div class="spin-btn-wrap">
+        <button id="spin-btn" class="btn-paw">
+          <i class="fas fa-sync-alt"></i>&nbsp; 旋轉！
+        </button>
+      </div>
+    </div>
+
+    <!-- 選項管理 -->
+    <div class="paw-card spinner-items-section">
+      <div class="page-title">
+        <span>🎯</span> 轉盤選項
+      </div>
+
+      <!-- 新增輸入 -->
+      <div class="spinner-add-row">
+        <input
+          type="text"
+          id="new-item-input"
+          placeholder="輸入新選項，按 Enter 或點 ＋"
+          maxlength="20"
+        />
+        <button id="add-item-btn" class="btn-paw" style="padding:8px 16px;border-radius:50px;">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <!-- 選項清單 -->
+      <ul id="spinner-items-list"></ul>
+      <p id="items-count-hint" class="items-count-hint"></p>
+    </div>
+
+  </section>
+
+  <!-- ===== 投票頁（Sub-Task 5 實作） ===== -->
+  <section id="page-vote" class="page-section">
+    <div class="vote-page-placeholder paw-card">
+      <span style="font-size:3rem;">🗳️</span>
+      <p style="margin-top:12px;font-weight:700;color:var(--color-primary);">投票功能</p>
+      <p style="color:var(--color-muted);font-size:0.9rem;margin-top:4px;">即將推出！敬請期待 🐾</p>
+    </div>
+  </section>
+
+  <!-- ===== 底部導覽列 ===== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="spinner">
+      <span class="nav-icon">🎡</span>
+      <span>轉盤</span>
+    </button>
+    <button class="nav-item" data-page="vote">
+      <span class="nav-icon">🗳️</span>
+      <span>投票</span>
+    </button>
+  </nav>
+
+  <!-- ===== 轉盤結果 Modal ===== -->
+  <div class="modal fade" id="result-modal" tabindex="-1" aria-labelledby="result-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="result-modal-label">🎉 結果出爐！</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body" style="padding: 32px 24px;">
+          <span class="result-emoji">🎊</span>
+          <p class="result-text" id="result-winner-text"></p>
+          <p class="result-subtitle">就決定是你了！</p>
+        </div>
+        <div class="modal-footer" style="justify-content:center; border:none; padding-bottom:24px;">
+          <button type="button" class="btn-paw" data-bs-dismiss="modal">
+            好的！
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scripts ===== -->
+  <!-- jQuery -->
+  <script src="./libs/js/jquery.min.js"></script>
+  <!-- Bootstrap 5.3 -->
+  <script src="./libs/js/bootstrap.js"></script>
+  <!-- 轉盤邏輯 -->
+  <script src="./js/spinner.js"></script>
+  <!-- 投票邏輯（Sub-Task 5） -->
+  <script src="./js/vote.js"></script>
+  <!-- APP 主控（頁面切換、SW 註冊） -->
+  <script src="./js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+/* ===================================================
+   小土小紅家 - 投票頁樣式 vote.css（佔位，Sub-Task 5 填入）
+   =================================================== */
+
+.vote-page-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-muted);
+}

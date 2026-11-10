@@ -1,0 +1,16 @@
+﻿# Eclipse
+.metadata/
+RemoteSystemsTempFiles/
+.classpath
+.project
+.settings/
+bin/
+target/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo

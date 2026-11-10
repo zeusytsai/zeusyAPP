@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>產生 APP 圖示</title>
+  <style>
+    body { font-family: system-ui; padding: 20px; background: #FFF8F0; }
+    h2 { color: #FF8C42; }
+    canvas { border: 1px solid #ccc; display: block; margin: 8px 0; }
+    button { background: #FF8C42; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-right: 8px; }
+    .step { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(255,140,66,0.15); }
+    p { color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h2>🐾 小土小紅家 APP 圖示產生器</h2>
+  <p>按下按鈕產生圖示，然後右鍵「另存圖片」儲存到 <code>icons/</code> 資料夾。</p>
+
+  <div class="step">
+    <p><strong>192×192 圖示</strong>（存為 icon-192.png）</p>
+    <canvas id="c192" width="192" height="192"></canvas>
+    <button onclick="download('c192','icon-192.png')">⬇ 下載 icon-192.png</button>
+  </div>
+
+  <div class="step">
+    <p><strong>512×512 圖示</strong>（存為 icon-512.png）</p>
+    <canvas id="c512" width="512" height="512"></canvas>
+    <button onclick="download('c512','icon-512.png')">⬇ 下載 icon-512.png</button>
+  </div>
+
+  <script>
+    function drawIcon(canvas) {
+      var s = canvas.width;
+      var ctx = canvas.getContext('2d');
+      var cx = s / 2, cy = s / 2;
+
+      // 橘色圓形背景
+      ctx.beginPath();
+      ctx.arc(cx, cy, s / 2, 0, Math.PI * 2);
+      ctx.fillStyle = '#FF8C42';
+      ctx.fill();
+
+      // 狗臉
+      ctx.beginPath();
+      ctx.arc(cx, cy + s * 0.05, s * 0.27, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFF8F0';
+      ctx.fill();
+
+      // 左耳
+      ctx.save();
+      ctx.translate(cx - s * 0.21, cy - s * 0.18);
+      ctx.rotate(-0.35);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s * 0.1, s * 0.15, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#D4692A';
+      ctx.fill();
+      ctx.restore();
+
+      // 右耳
+      ctx.save();
+      ctx.translate(cx + s * 0.21, cy - s * 0.18);
+      ctx.rotate(0.35);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s * 0.1, s * 0.15, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#D4692A';
+      ctx.fill();
+      ctx.restore();
+
+      // 眼睛左
+      ctx.beginPath();
+      ctx.arc(cx - s * 0.09, cy, s * 0.045, 0, Math.PI * 2);
+      ctx.fillStyle = '#3D2B1F';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx - s * 0.075, cy - s * 0.015, s * 0.015, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+
+      // 眼睛右
+      ctx.beginPath();
+      ctx.arc(cx + s * 0.09, cy, s * 0.045, 0, Math.PI * 2);
+      ctx.fillStyle = '#3D2B1F';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx + s * 0.105, cy - s * 0.015, s * 0.015, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+
+      // 鼻子
+      ctx.beginPath();
+      ctx.ellipse(cx, cy + s * 0.085, s * 0.055, s * 0.04, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#3D2B1F';
+      ctx.fill();
+
+      // 嘴巴
+      ctx.beginPath();
+      ctx.moveTo(cx - s * 0.05, cy + s * 0.12);
+      ctx.quadraticCurveTo(cx, cy + s * 0.16, cx + s * 0.05, cy + s * 0.12);
+      ctx.strokeStyle = '#3D2B1F';
+      ctx.lineWidth = s * 0.012;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+
+      // 腮紅
+      ctx.globalAlpha = 0.45;
+      ctx.beginPath();
+      ctx.arc(cx - s * 0.16, cy + s * 0.09, s * 0.05, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFB347';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx + s * 0.16, cy + s * 0.09, s * 0.05, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFB347';
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    function download(canvasId, filename) {
+      var canvas = document.getElementById(canvasId);
+      var link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // 自動繪製
+    drawIcon(document.getElementById('c192'));
+    drawIcon(document.getElementById('c512'));
+  </script>
+</body>
+</html>
