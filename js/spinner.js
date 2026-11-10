@@ -174,9 +174,9 @@
   function loadItems() {
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
-      items = stored ? JSON.parse(stored) : ['選項一', '選項二', '選項三'];
+      items = stored ? JSON.parse(stored) : ['小土', '小紅', '布朗'];
     } catch (e) {
-      items = ['選項一', '選項二', '選項三'];
+      items = ['小土', '小紅', '布朗'];
     }
   }
 
