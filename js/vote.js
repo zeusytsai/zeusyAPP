@@ -64,14 +64,16 @@
 
     } else {
       // === 已投票或已結束：顯示結果長條圖 ===
-      var myVotedIdx = parseInt(localStorage.getItem('voted_option_' + voteId), 10);
+      var myVotedIdxRaw = localStorage.getItem('voted_option_' + voteId);
+      // parseInt(null) 會回傳 NaN，用 null 檢查避免誤判
+      var myVotedIdx = myVotedIdxRaw !== null ? parseInt(myVotedIdxRaw, 10) : -1;
       var $results = $('<div class="vote-results">');
 
       options.forEach(function (opt, idx) {
         var count   = opt.count || 0;
         var pct     = totalVotes > 0 ? Math.round(count / totalVotes * 100) : 0;
         var isWinner = count === maxCount && count > 0;
-        var isMyVote = idx === myVotedIdx;
+        var isMyVote = myVotedIdx >= 0 && idx === myVotedIdx;
 
         $results.append(
           '<div class="result-row">' +
@@ -152,23 +154,20 @@
 
     if (localStorage.getItem('voted_' + voteId)) return;
 
-    // 樂觀 UI：先標記已投
-    $btn.addClass('voted');
-    $btn.find('.option-check').css('visibility', 'visible');
+    // 先寫入 localStorage，確保 onValue 重新渲染時一定能判斷到已投票
+    localStorage.setItem('voted_' + voteId, '1');
+    localStorage.setItem('voted_option_' + voteId, optionIdx);
 
     // Firebase transaction 保證票數安全遞增
     db.ref('votes/' + voteId + '/options/' + optionIdx + '/count')
       .transaction(function (current) {
         return (current || 0) + 1;
       })
-      .then(function () {
-        localStorage.setItem('voted_' + voteId, '1');
-        localStorage.setItem('voted_option_' + voteId, optionIdx);
-      })
       .catch(function (err) {
+        // 失敗時還原 localStorage
         console.error('投票失敗', err);
-        $btn.removeClass('voted');
-        $btn.find('.option-check').css('visibility', 'hidden');
+        localStorage.removeItem('voted_' + voteId);
+        localStorage.removeItem('voted_option_' + voteId);
       });
   });
 
