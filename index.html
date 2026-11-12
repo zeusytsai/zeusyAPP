@@ -85,13 +85,28 @@
 
   </section>
 
-  <!-- ===== 投票頁（Sub-Task 5 實作） ===== -->
+  <!-- ===== 投票頁 ===== -->
   <section id="page-vote" class="page-section">
-    <div class="vote-page-placeholder paw-card">
-      <span style="font-size:3rem;">🗳️</span>
-      <p style="margin-top:12px;font-weight:700;color:var(--color-primary);">投票功能</p>
-      <p style="color:var(--color-muted);font-size:0.9rem;margin-top:4px;">即將推出！敬請期待 🐾</p>
+
+    <!-- 工具列 -->
+    <div class="vote-toolbar">
+      <div class="page-title" style="margin-bottom:0;">
+        <span>🗳️</span> 家庭投票
+      </div>
+      <button class="btn-paw" data-bs-toggle="modal" data-bs-target="#new-vote-modal" style="padding:8px 18px;font-size:0.9rem;">
+        ＋ 新增投票
+      </button>
     </div>
+
+    <!-- 進行中投票列表 -->
+    <div id="vote-open-list"></div>
+
+    <!-- 已結束投票 -->
+    <div id="closed-section" style="display:none;">
+      <div class="vote-section-title">已結束</div>
+      <div id="vote-closed-list"></div>
+    </div>
+
   </section>
 
   <!-- ===== 底部導覽列 ===== -->
@@ -128,14 +143,59 @@
     </div>
   </div>
 
+  <!-- ===== 新增投票 Modal ===== -->
+  <div class="modal fade" id="new-vote-modal" tabindex="-1" aria-labelledby="new-vote-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="new-vote-modal-label">🗳️ 新增投票</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body" style="padding: 20px 24px;">
+          <!-- 投票標題 -->
+          <div style="margin-bottom:16px;">
+            <label style="font-weight:600;font-size:0.9rem;margin-bottom:6px;display:block;">投票問題</label>
+            <input type="text" id="new-vote-title" class="form-control" placeholder="例如：這週末去哪裡玩？" maxlength="40" />
+          </div>
+          <!-- 選項列表 -->
+          <div style="margin-bottom:10px;">
+            <label style="font-weight:600;font-size:0.9rem;margin-bottom:8px;display:block;">投票選項（2~6 個）</label>
+            <div id="new-vote-options">
+              <div class="option-input-row">
+                <input type="text" placeholder="選項 1" maxlength="30" />
+                <button class="btn-remove-option" title="刪除">✕</button>
+              </div>
+              <div class="option-input-row">
+                <input type="text" placeholder="選項 2" maxlength="30" />
+                <button class="btn-remove-option" title="刪除">✕</button>
+              </div>
+            </div>
+            <button id="add-option-btn" class="btn-paw-outline" style="margin-top:6px;">
+              ＋ 新增選項
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer" style="border:none; padding: 0 24px 20px; gap:8px;">
+          <button type="button" class="btn-paw-outline" data-bs-dismiss="modal">取消</button>
+          <button type="button" id="submit-vote-btn" class="btn-paw">發起投票</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== Scripts ===== -->
   <!-- jQuery -->
   <script src="./libs/js/jquery.min.js"></script>
   <!-- Bootstrap 5.3 -->
   <script src="./libs/js/bootstrap.js"></script>
+  <!-- Firebase SDK (Compat 版，支援 firebase.database() 語法) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <!-- Firebase 設定與初始化 -->
+  <script src="./js/firebase-config.js"></script>
   <!-- 轉盤邏輯 -->
   <script src="./js/spinner.js"></script>
-  <!-- 投票邏輯（Sub-Task 5） -->
+  <!-- 投票邏輯 -->
   <script src="./js/vote.js"></script>
   <!-- APP 主控（頁面切換、SW 註冊） -->
   <script src="./js/app.js"></script>
