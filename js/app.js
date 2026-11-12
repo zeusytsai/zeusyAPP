@@ -26,6 +26,11 @@ $(function () {
     if (pageId === 'spinner' && typeof drawSpinner === 'function') {
       drawSpinner();
     }
+
+    // 切換到數獨頁時，若尚未開始則初始化
+    if (pageId === 'sudoku' && typeof window.sudokuInit === 'function') {
+      window.sudokuInit();
+    }
   }
 
   // 點擊導覽項目

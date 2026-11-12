@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#FF8C42" />
-  <meta name="description" content="小土小紅的家庭小工具，轉盤與投票都在這裡！" />
+  <meta name="description" content="小土小紅的家庭小工具，轉盤、投票與數獨都在這裡！" />
 
   <!-- PWA -->
   <link rel="manifest" href="./manifest.json" />
@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="./css/main.css" />
   <link rel="stylesheet" href="./css/spinner.css" />
   <link rel="stylesheet" href="./css/vote.css" />
+  <link rel="stylesheet" href="./css/sudoku.css" />
 </head>
 <body>
 
@@ -109,6 +110,49 @@
 
   </section>
 
+  <!-- ===== 數獨頁 ===== -->
+  <section id="page-sudoku" class="page-section">
+
+    <!-- 狀態列 -->
+    <div class="sudoku-statusbar">
+      <div class="sudoku-mistakes">
+        <div id="sudoku-hearts" class="mistake-hearts"></div>
+        <span style="color:var(--color-muted);font-size:0.75rem;">錯誤</span>
+      </div>
+      <span class="sudoku-difficulty">困難</span>
+      <div id="sudoku-timer" class="sudoku-timer">00:00</div>
+    </div>
+
+    <!-- 棋盤 -->
+    <div class="sudoku-board-wrap">
+      <div id="sudoku-board" class="sudoku-board"></div>
+    </div>
+
+    <!-- 數字鍵盤 -->
+    <div id="sudoku-numpad" class="sudoku-numpad"></div>
+
+    <!-- 操作按鈕 -->
+    <div class="sudoku-actions">
+      <button id="sudoku-delete-btn" class="sudoku-btn">
+        <i class="fas fa-eraser"></i>
+        <span>清除</span>
+      </button>
+      <button id="sudoku-notes-btn" class="sudoku-btn">
+        <i class="fas fa-pencil-alt"></i>
+        <span>筆記</span>
+      </button>
+      <button id="sudoku-hint-btn" class="sudoku-btn">
+        <i class="fas fa-lightbulb"></i>
+        <span>提示 (<span class="hint-count">3</span>)</span>
+      </button>
+      <button id="sudoku-new-btn" class="sudoku-btn new-game-btn">
+        <i class="fas fa-redo"></i>
+        <span>新題目</span>
+      </button>
+    </div>
+
+  </section>
+
   <!-- ===== 底部導覽列 ===== -->
   <nav class="bottom-nav">
     <button class="nav-item active" data-page="spinner">
@@ -118,6 +162,10 @@
     <button class="nav-item" data-page="vote">
       <span class="nav-icon">🗳️</span>
       <span>投票</span>
+    </button>
+    <button class="nav-item" data-page="sudoku">
+      <span class="nav-icon">🧩</span>
+      <span>數獨</span>
     </button>
   </nav>
 
@@ -197,6 +245,8 @@
   <script src="./js/spinner.js"></script>
   <!-- 投票邏輯 -->
   <script src="./js/vote.js"></script>
+  <!-- 數獨遊戲 -->
+  <script src="./js/sudoku.js"></script>
   <!-- APP 主控（頁面切換、SW 註冊） -->
   <script src="./js/app.js"></script>
 
