@@ -1,5 +1,5 @@
-// 小土小紅家 Service Worker v1.3
-const CACHE_NAME = 'xiaotuXiaohong-v1.3';
+// 小土小紅家 Service Worker v1.4
+const CACHE_NAME = 'xiaotuXiaohong-v1.4';
 
 const STATIC_ASSETS = [
   './index.html',
@@ -7,9 +7,11 @@ const STATIC_ASSETS = [
   './css/main.css',
   './css/spinner.css',
   './css/vote.css',
+  './css/sudoku.css',
   './js/app.js',
   './js/spinner.js',
   './js/vote.js',
+  './js/sudoku.js',
   './libs/js/jquery.min.js',
   './libs/js/bootstrap.js',
   './libs/css/bootstrap.css',

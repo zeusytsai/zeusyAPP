@@ -1,7 +1,7 @@
 {
   "name": "小土小紅家",
   "short_name": "小土小紅家",
-  "description": "小土小紅的家庭小工具，轉盤與投票都在這裡！",
+  "description": "小土小紅的家庭小工具，轉盤、投票與數獨都在這裡！",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFF8F0",
