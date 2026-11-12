@@ -8,6 +8,7 @@ const STATIC_ASSETS = [
   './css/spinner.css',
   './css/vote.css',
   './css/sudoku.css',
+  './js/firebase-config.js',
   './js/app.js',
   './js/spinner.js',
   './js/vote.js',
